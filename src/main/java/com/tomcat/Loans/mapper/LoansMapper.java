@@ -1,0 +1,25 @@
+package com.tomcat.Loans.mapper;
+
+import com.tomcat.Loans.dto.LoansDto;
+import com.tomcat.Loans.model.Loans;
+
+public class LoansMapper {
+
+    public static Loans mapToLoansDto(LoansDto loansDto,Loans loans) {
+        loans.setLoanType(loansDto.getLoanType());
+        loans.setTotalLoan(loansDto.getTotalLoan());
+        loans.setAmountPaid(loansDto.getAmountPaid());
+        loans.setMobileNumber(loansDto.getMobileNumber());
+        loans.setOutstandingAmount(loansDto.getOutstandingAmount());
+        return loans;
+    }
+
+    public static LoansDto mapToLoans(Loans loans,LoansDto loansDto) {
+        loansDto.setLoanType(loans.getLoanType());
+        loansDto.setTotalLoan(loans.getTotalLoan());
+        loansDto.setAmountPaid(loans.getAmountPaid());
+        loansDto.setMobileNumber(loans.getMobileNumber());
+        loansDto.setOutstandingAmount(loans.getOutstandingAmount());
+        return loansDto;
+    }
+}

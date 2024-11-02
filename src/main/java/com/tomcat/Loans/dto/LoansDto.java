@@ -1,0 +1,46 @@
+package com.tomcat.Loans.dto;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import lombok.*;
+import org.aspectj.weaver.ast.Not;
+
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Schema(
+        name = "Loans",
+        description = "holds loan related information"
+)
+public class LoansDto {
+    @Schema(
+            description = "customer mobile number",example = "91234567891"
+    )
+    @NotEmpty(message = "mobile number must not be null or blank")
+    @Pattern(regexp = "!$[0-9]{10}",message = "mobile number must be of 10 digit only")
+    private String mobileNumber;
+
+    @Schema(
+            description = "type of the loan",example = "personal loan"
+    )
+    @NotEmpty(message = "loan type must not be null or empty")
+    @Size(min = 4,max = 20,message = "loan type should be at least of 4 characters")
+    private String loanType;
+
+    @Schema(
+            description = "total loan amount taken by customer",example = "500000"
+    )
+    @NotEmpty(message = "total loan must not be null or blank")
+    @Size(min = 10000,message = "total loan should be of minimum 10k")
+    private int totalLoan;
+
+    @Schema(
+            description = "total amount paid by customer to the bank",example = "120000"
+    )
+    private String amountPaid;
+
+    @Schema(
+            description = "total outstanding on active loan",example = "380000"
+    )
+    private int outstandingAmount;
+}
