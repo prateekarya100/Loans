@@ -11,8 +11,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(
-        name = "Loans",
-        description = "Loans Controller"
+        name = "EazyBank Loans Service",
+        description = "EazyBank Loans Microservices Restful WebServices Documentation"
 )
 @RestController
 @RequestMapping(value = "/api/loans")
