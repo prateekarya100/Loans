@@ -34,7 +34,7 @@ public class LoansController {
         loansService.createNewLoan(mobileNumber);
         return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new ResponseDto(HttpStatus.CREATED,
-                            "loan created successfully"));
+                            "loan granted to customer successfully"));
     }
 
     @GetMapping(value = "/fetch-loan")
