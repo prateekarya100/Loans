@@ -21,4 +21,13 @@ public class GlobalException  {
                 LocalDateTime.now()
         ), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(LoanAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponseDto> handleLoanAlreadyExistsException(LoanAlreadyExistsException ex, WebRequest request) {
+        return new ResponseEntity<>(new ErrorResponseDto(request.getDescription(false),
+                HttpStatus.CONFLICT,
+                ex.getMessage(),
+                LocalDateTime.now())
+                ,HttpStatus.CONFLICT);
+    }
 }

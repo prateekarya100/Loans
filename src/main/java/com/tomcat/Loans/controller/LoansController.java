@@ -26,18 +26,17 @@ public class LoansController {
 
     private ILoansService loansService;
 
-    @PostMapping(value = "/create")
-    public ResponseEntity<ResponseDto> createLoan(@RequestParam
-//                                                      @Valid
-//                                                      @Pattern(regexp = "!$[0-9]{10}",message = "mobile number must be of 10 digit only")
-                                                      String mobileNumber){
+    @PostMapping(value = "/createLoan")
+    public ResponseEntity<ResponseDto> createLoan(
+            @RequestParam
+            String mobileNumber){
         loansService.createNewLoan(mobileNumber);
         return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new ResponseDto(HttpStatus.CREATED,
                             "loan granted to customer successfully"));
     }
 
-    @GetMapping(value = "/fetch-loan")
+    @GetMapping(value = "/fetchLoan")
     public ResponseEntity<ResponseDto> fetchLoans(@PathVariable String mobileNumber){
         LoansDto loansDto = loansService.fetchLoanDetails(mobileNumber);
         if(loansDto!=null){
