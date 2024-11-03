@@ -127,6 +127,30 @@ public class LoansController {
        }
     }
 
+
+    @Operation(
+            summary = "Closing customer loan account information from eazybank",
+            description = "EazyBank closing existing loan restful web services documentation"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "202",
+                            description = "Request Accepted Successfully"
+                    ),
+                    @ApiResponse(
+                            description = "Expectation Failed",
+                            responseCode = "417"
+                    ),
+                    @ApiResponse(
+                            description = "Internal_Server_Error",
+                            responseCode = "500",
+                            content = @Content(
+                                    schema = @Schema(implementation = ErrorResponseDto.class)
+                            )
+                    )
+            }
+    )
     @DeleteMapping(value = "/loanClosure")
     public ResponseEntity<ResponseDto> loanClosure(@RequestParam
                                                        @Pattern(regexp = "^$|[0-9]{10}",message = "mobile number must be of 10 digit only")
