@@ -23,7 +23,7 @@ public class Loans  extends  BaseEntity{
 
     private String mobileNumber;
 
-    private Long loanAccountNumber;
+    private String loanAccountNumber;
 
     private String loanType;
 

@@ -3,9 +3,8 @@ package com.tomcat.Loans.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.*;
-import org.aspectj.weaver.ast.Not;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor @ToString
 @Schema(
         name = "Loans",
         description = "holds loan related information"
@@ -15,15 +14,14 @@ public class LoansDto {
             description = "customer mobile number",example = "91234567891"
     )
     @NotEmpty(message = "mobile number must not be null or blank")
-    @Pattern(regexp = "!$[0-9]{10}",message = "mobile number must be of 10 digit only")
+    @Pattern(regexp = "$|[0-9]{10}",message = "mobile number must be of 10 digit only")
     private String mobileNumber;
 
     @Schema(
             description = "customer mobile number",example = "1122334455"
     )
-//    @NotEmpty(message = "loan account number must not be null or blank")
-    @Pattern(regexp = "!$[0-9]{10}",message = "loan account number must be of 10 digit only")
-    private Long loanAccountNumber;
+    @Pattern(regexp = "$|[0-9]{10}",message = "account number must be of 10 digits number")
+    private String loanAccountNumber;
 
     @Schema(
             description = "type of the loan",example = "personal loan"
