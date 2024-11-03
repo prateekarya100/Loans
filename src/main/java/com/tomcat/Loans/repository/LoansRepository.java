@@ -10,5 +10,4 @@ import java.util.Optional;
 public interface LoansRepository extends JpaRepository<Loans, Long> {
     Optional<Loans> findByMobileNumber(String mobileNumber);
 
-    Optional<Loans> findByLoanAccountNumber(String loanAccountNumber);
 }
