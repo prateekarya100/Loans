@@ -65,6 +65,7 @@ public class ILoansServiceImpl implements ILoansService {
                 ()->new ResourceNotFoundException("loan","mobile",loansDto.getMobileNumber())
         );
         LoansMapper.mapToLoans(loansDto,loans);
+        loansRepository.save(loans);
         return isLoanDetailsUpdated=true;
     }
 }

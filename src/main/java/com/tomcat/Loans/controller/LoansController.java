@@ -51,9 +51,13 @@ public class LoansController {
     public ResponseEntity<ResponseDto> updateLoan(@Valid @RequestBody LoansDto loansDto){
        boolean isUpdated = loansService.updateLoanDetails(loansDto);
        if (isUpdated){
-           return ResponseEntity.status(HttpStatus.OK).build();
+           return ResponseEntity.status(HttpStatus.OK)
+                   .body(new ResponseDto(HttpStatus.OK,"customer loan details updated successfully"));
        }else {
-           return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
+           return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                   .body(new ResponseDto(HttpStatus.EXPECTATION_FAILED,
+                           "something went wrong, during loan details update please contact to development team"));
+
        }
     }
 }

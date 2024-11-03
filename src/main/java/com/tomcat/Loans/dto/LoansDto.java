@@ -33,7 +33,6 @@ public class LoansDto {
     @Schema(
             description = "total loan amount taken by customer",example = "500000"
     )
-    @Size(min = 10000,message = "total loan should be of minimum 10k")
     @Positive(message = "total loan should be positive, no negative value accepted here")
     private int totalLoan;
 
@@ -41,7 +40,7 @@ public class LoansDto {
             description = "total amount paid by customer to the bank",example = "120000"
     )
     @PositiveOrZero(message = "amount paid by customer should be zero or more")
-    private int amountPaid;
+    private String amountPaid;
 
     @Schema(
             description = "total outstanding on active loan",example = "380000"
