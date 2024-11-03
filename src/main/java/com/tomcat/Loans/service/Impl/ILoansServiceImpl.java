@@ -32,6 +32,19 @@ public class ILoansServiceImpl implements ILoansService {
         return false;
     }
 
+    private Loans createNewLoanAccount(String mobileNumber) {
+        Loans loans = new Loans();
+        Long loanAccountNumber = 1000000000L + new Random(900000000).nextLong();
+
+        loans.setLoanId(loanAccountNumber);
+        loans.setMobileNumber(mobileNumber);
+        loans.setTotalLoan(LoansConstants.TOTAL_LOAN_AMOUNT_DISBURSED);
+        loans.setAmountPaid(LoansConstants.LOAN_AMOUNT_PAID);
+        loans.setOutstandingAmount(LoansConstants.OUTSTANDING_LOAN_AMOUNT);
+        loans.setLoanType(LoansConstants.LOAN_TYPE_PERSONAL);
+        return loans;
+    }
+
     @Override
     public LoansDto fetchLoanDetails(String mobileNumber) {
         Loans loans = loansRepository.findByMobileNumber(mobileNumber).orElseThrow(
@@ -40,16 +53,25 @@ public class ILoansServiceImpl implements ILoansService {
         return LoansMapper.mapToDto(loans,new LoansDto());
     }
 
-    private Loans createNewLoanAccount(String mobileNumber) {
-        Loans loans = new Loans();
-        Long loanAccountNumber=10000000000L + new Random(900000000).nextInt();
-        loans.setLoanId(loanAccountNumber);
-        loans.setMobileNumber(mobileNumber);
-        loans.setTotalLoan(LoansConstants.TOTAL_LOAN_AMOUNT_DISBURSED);
-        loans.setAmountPaid(0);
-        loans.setOutstandingAmount(LoansConstants.TOTAL_LOAN_AMOUNT_DISBURSED);
-        return loans;
-    }
+    /**
+     * @param loansDto
+     * @return
+     */
+//    @Override
+//    public boolean updateLoanDetails(LoansDto loansDto) {
+//        return false;
+//    }
+//
+//    private Loans createNewLoanAccount(String mobileNumber) {
+//        Loans loans = new Loans();
+//        Long loanAccountNumber=10000000000L + new Random(900000000).nextInt();
+//        loans.setLoanId(loanAccountNumber);
+//        loans.setMobileNumber(mobileNumber);
+//        loans.setTotalLoan(LoansConstants.TOTAL_LOAN_AMOUNT_DISBURSED);
+//        loans.setAmountPaid(0);
+//        loans.setOutstandingAmount(LoansConstants.TOTAL_LOAN_AMOUNT_DISBURSED);
+//        return loans;
+//    }
 
 
 }

@@ -4,6 +4,7 @@ import com.tomcat.Loans.dto.LoansDto;
 import com.tomcat.Loans.dto.ResponseDto;
 import com.tomcat.Loans.service.ILoansService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -38,7 +39,7 @@ public class LoansController {
         }
     }
 
-    @GetMapping(value = "/fetch-loans")
+    @GetMapping(value = "/fetch-loan")
     public ResponseEntity<ResponseDto> fetchLoans(@PathVariable String mobileNumber){
         LoansDto loansDto = loansService.fetchLoanDetails(mobileNumber);
         if(loansDto!=null){
@@ -49,4 +50,18 @@ public class LoansController {
                     .body(new ResponseDto(HttpStatus.EXPECTATION_FAILED,HttpStatus.EXPECTATION_FAILED.toString()));
         }
     }
+
+//    @PutMapping(value = "/update-loan")
+//    public ResponseEntity<ResponseDto> updateLoans(@RequestBody @Valid LoansDto loansDto){
+//        boolean isLoanDetailUpdated = loansService.updateLoanDetails(loansDto);
+//        if(isLoanDetailUpdated){
+//            return ResponseEntity
+//                    .status(HttpStatus.ACCEPTED)
+//                    .body(new ResponseDto(HttpStatus.ACCEPTED,"loan details updated successfully"));
+//        }else{
+//            return ResponseEntity
+//                    .status(HttpStatus.EXPECTATION_FAILED)
+//                    .body(new ResponseDto(HttpStatus.EXPECTATION_FAILED,HttpStatus.EXPECTATION_FAILED.toString()));
+//        }
+//    }
 }
