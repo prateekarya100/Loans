@@ -68,4 +68,19 @@ public class ILoansServiceImpl implements ILoansService {
         loansRepository.save(loans);
         return isLoanDetailsUpdated=true;
     }
+
+    /**
+     * @param mobileNumber
+     * @return
+     */
+    @Override
+    public boolean loanClosure(String mobileNumber) {
+        Optional<Loans> loansOptional = loansRepository.findByMobileNumber(mobileNumber);
+        if (loansOptional.isPresent()) {
+            loansRepository.delete(loansOptional.get());
+        }else{
+            throw new ResourceNotFoundException("loan","mobile",mobileNumber);
+        }
+        return true;
+    }
 }

@@ -40,7 +40,7 @@ public class LoansDto {
             description = "total amount paid by customer to the bank",example = "120000"
     )
     @PositiveOrZero(message = "amount paid by customer should be zero or more")
-    private String amountPaid;
+    private int amountPaid;
 
     @Schema(
             description = "total outstanding on active loan",example = "380000"

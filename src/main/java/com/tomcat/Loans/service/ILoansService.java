@@ -10,4 +10,6 @@ public interface ILoansService {
     LoansDto fetchLoanDetails(String mobileNumber);
 
     boolean updateLoanDetails(LoansDto loansDto);
+
+    boolean loanClosure( String mobileNumber);
 }

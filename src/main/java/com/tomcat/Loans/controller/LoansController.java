@@ -57,7 +57,21 @@ public class LoansController {
            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
                    .body(new ResponseDto(HttpStatus.EXPECTATION_FAILED,
                            "something went wrong, during loan details update please contact to development team"));
-
        }
+    }
+
+    @DeleteMapping(value = "/loanClosure")
+    public ResponseEntity<ResponseDto> loanClosure(@Valid @RequestParam String mobileNumber){
+        boolean isloanClosed = loansService.loanClosure(mobileNumber);
+        if (isloanClosed){
+            return ResponseEntity
+                    .status(HttpStatus.ACCEPTED)
+                    .body(new ResponseDto(HttpStatus.ACCEPTED,
+                            "loan closed successfully,now there is no data exist for this customer"));
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ResponseDto(HttpStatus.BAD_REQUEST,
+                            "oops, something went wrong, please contact to development team"));
+        }
     }
 }
