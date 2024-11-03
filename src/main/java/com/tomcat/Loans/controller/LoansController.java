@@ -28,7 +28,6 @@ public class LoansController {
 
     @PostMapping(value = "/createLoan")
     public ResponseEntity<ResponseDto> createLoan(
-            @Valid
             @RequestParam
             @Pattern(regexp = "^$|[0-9]{10}",message = "mobile number must be of 10 digit only")
             String mobileNumber){
@@ -39,9 +38,10 @@ public class LoansController {
     }
 
     @GetMapping(value = "/fetchLoan")
-    public ResponseEntity<LoansDto> fetchLoans(@Valid @RequestParam("mobileNumber")
-                                                   @Pattern(regexp = "^$|[0-9]{10}",message = "mobile number must be of 10 digit only")
-                                                   String mobileNumber) {
+    public ResponseEntity<LoansDto> fetchLoans(
+            @RequestParam
+            @Pattern(regexp = "^$|[0-9]{10}",message = "mobile number must be of 10 digit only")
+            String mobileNumber) {
         LoansDto loansDto = loansService.fetchLoanDetails(mobileNumber);
         if (loansDto != null){
             return ResponseEntity.ok(loansDto);
@@ -64,7 +64,7 @@ public class LoansController {
     }
 
     @DeleteMapping(value = "/loanClosure")
-    public ResponseEntity<ResponseDto> loanClosure(@Valid @RequestParam
+    public ResponseEntity<ResponseDto> loanClosure(@RequestParam
                                                        @Pattern(regexp = "^$|[0-9]{10}",message = "mobile number must be of 10 digit only")
                                                        String mobileNumber){
         boolean isloanClosed = loansService.loanClosure(mobileNumber);
