@@ -48,7 +48,7 @@ public class LoansController {
     }
 
     @PutMapping(value = "/updateLoan")
-    public ResponseEntity<ResponseDto> updateLoans(@RequestBody @Valid LoansDto loansDto){
+    public ResponseEntity<ResponseDto> updateLoans(@Valid @RequestBody LoansDto loansDto){
         boolean isLoanDetailUpdated = loansService.updateLoanDetails(loansDto);
         if(isLoanDetailUpdated){
             return ResponseEntity
