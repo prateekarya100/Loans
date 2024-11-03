@@ -5,7 +5,7 @@ import com.tomcat.Loans.exception.LoanAlreadyExistsException;
 import jakarta.validation.Valid;
 
 public interface ILoansService {
-    boolean createNewLoan(String mobileNumber) throws LoanAlreadyExistsException;
+    boolean createNewLoan(String mobileNumber);
 
     LoansDto fetchLoanDetails(String mobileNumber);
 

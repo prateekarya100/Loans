@@ -21,11 +21,11 @@ public class ILoansServiceImpl implements ILoansService {
     private LoansRepository loansRepository;
 
     @Override
-    public boolean createNewLoan(String mobileNumber) throws LoanAlreadyExistsException {
+    public boolean createNewLoan(String mobileNumber)  {
         boolean loanCreated = false;
         Optional<Loans> loansOptional = loansRepository.findByMobileNumber(mobileNumber);
         if (loansOptional.isPresent()) {
-            throw new LoanAlreadyExistsException("loan already exists with mobile number " + mobileNumber);
+            throw new LoanAlreadyExistsException("loan already exists with mobile number : "+mobileNumber);
         }else{
             loansRepository.save(createNewLoanAccount(mobileNumber));
             loanCreated = true;
