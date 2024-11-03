@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
         name = "Loans",
         description = "schema to hold loans related information"
 )
-public class Loans {
+public class Loans  extends  BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long loanId;
