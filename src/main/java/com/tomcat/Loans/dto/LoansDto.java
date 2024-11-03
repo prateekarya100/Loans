@@ -35,7 +35,6 @@ public class LoansDto {
     @Schema(
             description = "total loan amount taken by customer",example = "500000"
     )
-    @NotEmpty(message = "total loan must not be null or blank")
     @Size(min = 10000,message = "total loan should be of minimum 10k")
     @Positive(message = "total loan should be positive, no negative value accepted here")
     private int totalLoan;
