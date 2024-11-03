@@ -63,7 +63,7 @@ public class LoansController {
         if (isCreated) {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new ResponseDto(HttpStatus.CREATED,
-                            "loan has been granted to customer successfully"));
+                            "loan has granted to customer successfully"));
         }
         else {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
