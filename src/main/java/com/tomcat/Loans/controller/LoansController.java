@@ -3,6 +3,9 @@ package com.tomcat.Loans.controller;
 import com.tomcat.Loans.dto.LoansDto;
 import com.tomcat.Loans.dto.ResponseDto;
 import com.tomcat.Loans.service.ILoansService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
@@ -26,15 +29,37 @@ public class LoansController {
 
     private ILoansService loansService;
 
+    @Operation(
+            description = "EazyBank new loan create restful web services"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "New resource created"
+                    ),
+                    @ApiResponse(
+                            responseCode = ""
+                    )
+            }
+    )
     @PostMapping(value = "/createLoan")
     public ResponseEntity<ResponseDto> createLoan(
             @RequestParam
             @Pattern(regexp = "^$|[0-9]{10}",message = "mobile number must be of 10 digit only")
             String mobileNumber){
-        loansService.createNewLoan(mobileNumber);
-        return ResponseEntity.status(HttpStatus.CREATED)
+        boolean isCreated = loansService.createNewLoan(mobileNumber);
+        if (isCreated) {
+            return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new ResponseDto(HttpStatus.CREATED,
                             "loan granted to customer successfully"));
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ResponseDto(
+                            HttpStatus.BAD_REQUEST,
+                            "error occur while creating loan account,please contact to development team"));
+        }
     }
 
     @GetMapping(value = "/fetchLoan")
