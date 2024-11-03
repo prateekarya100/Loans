@@ -1,15 +1,17 @@
 package com.tomcat.Loans.controller;
 
+import com.tomcat.Loans.dto.ErrorResponseDto;
 import com.tomcat.Loans.dto.LoansDto;
 import com.tomcat.Loans.dto.ResponseDto;
 import com.tomcat.Loans.service.ILoansService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,16 +32,25 @@ public class LoansController {
     private ILoansService loansService;
 
     @Operation(
-            description = "EazyBank new loan create restful web services"
+            summary = "Grant new loan to the bank customer",
+            description = "EazyBank new loan create restful web services documentation"
     )
     @ApiResponses(
             value = {
                     @ApiResponse(
                             responseCode = "201",
-                            description = "New resource created"
+                            description = "Request Processed and Create New Account Successfully"
                     ),
                     @ApiResponse(
-                            responseCode = ""
+                            description = "Expectation Failed",
+                            responseCode = "417"
+                    ),
+                    @ApiResponse(
+                            description = "Internal_Server_Error",
+                            responseCode = "500",
+                            content = @Content(
+                                    schema = @Schema(implementation = ErrorResponseDto.class)
+                            )
                     )
             }
     )
@@ -55,13 +66,36 @@ public class LoansController {
                             "loan granted to customer successfully"));
         }
         else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(
-                            HttpStatus.BAD_REQUEST,
+                            HttpStatus.EXPECTATION_FAILED,
                             "error occur while creating loan account,please contact to development team"));
         }
     }
 
+    @Operation(
+            summary = "Fetch customer loan account related information",
+            description = "EazyBank retrieving loan restful web services documentation"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Request Processed Successfully"
+                    ),
+                    @ApiResponse(
+                            description = "Expectation Failed",
+                            responseCode = "417"
+                    ),
+                    @ApiResponse(
+                            description = "Internal_Server_Error",
+                            responseCode = "500",
+                            content = @Content(
+                                    schema = @Schema(implementation = ErrorResponseDto.class)
+                            )
+                    )
+            }
+    )
     @GetMapping(value = "/fetchLoan")
     public ResponseEntity<LoansDto> fetchLoans(
             @RequestParam
@@ -69,12 +103,17 @@ public class LoansController {
             String mobileNumber) {
         LoansDto loansDto = loansService.fetchLoanDetails(mobileNumber);
         if (loansDto != null){
-            return ResponseEntity.ok(loansDto);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(loansDto);
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
+    @Operation(
+            summary = "Update customer loan related information",
+            description = "EazyBank loan details update restful web services documentation"
+    )
     @PutMapping(value = "/updateLoan")
     public ResponseEntity<ResponseDto> updateLoan(@Valid @RequestBody LoansDto loansDto){
        boolean isUpdated = loansService.updateLoanDetails(loansDto);
