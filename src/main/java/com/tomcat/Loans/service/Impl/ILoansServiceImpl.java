@@ -35,13 +35,13 @@ public class ILoansServiceImpl implements ILoansService {
 
     private Loans createNewLoanAccount(String mobileNumber) {
         Loans loans = new Loans();
-        Long loanAccountNumber = 100000000L + new Random(900000000).nextLong();
+        Long loanAccountNumber = 100000000L + new Random(900000000).nextInt();
 
         loans.setLoanAccountNumber(loanAccountNumber);
         loans.setMobileNumber(mobileNumber);
         loans.setTotalLoan(LoansConstants.TOTAL_LOAN_AMOUNT_DISBURSED);
-        loans.setAmountPaid(LoansConstants.LOAN_AMOUNT_PAID);
-        loans.setOutstandingAmount(LoansConstants.OUTSTANDING_LOAN_AMOUNT);
+        loans.setAmountPaid(0);
+        loans.setOutstandingAmount(LoansConstants.TOTAL_LOAN_AMOUNT_DISBURSED);
         loans.setLoanType(LoansConstants.LOAN_TYPE_PERSONAL);
         return loans;
     }

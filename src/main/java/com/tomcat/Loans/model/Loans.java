@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 )
 public class Loans {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long loanId;
 
     private String mobileNumber;
