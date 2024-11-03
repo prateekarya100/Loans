@@ -12,16 +12,6 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class GlobalException  {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponseDto> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
-        return new ResponseEntity<>(new ErrorResponseDto(
-                request.getDescription(false),
-                HttpStatus.NOT_FOUND,
-                ex.getMessage(),
-                LocalDateTime.now()
-        ), HttpStatus.NOT_FOUND);
-    }
-
     @ExceptionHandler(LoanAlreadyExistsException.class)
     public ResponseEntity<ErrorResponseDto> handleLoanAlreadyExistsException(LoanAlreadyExistsException ex, WebRequest request) {
         return new ResponseEntity<>(new ErrorResponseDto(request.getDescription(false),
@@ -29,5 +19,15 @@ public class GlobalException  {
                 ex.getMessage(),
                 LocalDateTime.now())
                 ,HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponseDto> handleResourceNotFoundException(ResourceNotFoundException ex,WebRequest request){
+        return new ResponseEntity<>(
+                new ErrorResponseDto(request.getDescription(false),
+                        HttpStatus.NOT_FOUND,
+                        ex.getMessage(),
+                        LocalDateTime.now()),
+                HttpStatus.NOT_FOUND);
     }
 }

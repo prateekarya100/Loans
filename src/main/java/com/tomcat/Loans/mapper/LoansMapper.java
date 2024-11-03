@@ -6,6 +6,7 @@ import com.tomcat.Loans.model.Loans;
 public class LoansMapper {
 
     public static Loans mapToLoans(LoansDto loansDto,Loans loans) {
+        loans.setLoanAccountNumber(loansDto.getLoanAccountNumber());
         loans.setLoanType(loansDto.getLoanType());
         loans.setTotalLoan(loansDto.getTotalLoan());
         loans.setAmountPaid(loansDto.getAmountPaid());
@@ -15,6 +16,7 @@ public class LoansMapper {
     }
 
     public static LoansDto mapToDto(Loans loans,LoansDto loansDto) {
+        loansDto.setLoanAccountNumber(loans.getLoanAccountNumber());
         loansDto.setLoanType(loans.getLoanType());
         loansDto.setTotalLoan(loans.getTotalLoan());
         loansDto.setAmountPaid(loans.getAmountPaid());

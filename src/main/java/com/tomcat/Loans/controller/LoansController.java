@@ -37,14 +37,13 @@ public class LoansController {
     }
 
     @GetMapping(value = "/fetchLoan")
-    public ResponseEntity<ResponseDto> fetchLoans(@PathVariable String mobileNumber){
+    public ResponseEntity<LoansDto> fetchLoans(@PathParam("mobileNumber")
+                                                      String mobileNumber){
         LoansDto loansDto = loansService.fetchLoanDetails(mobileNumber);
-        if(loansDto!=null){
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseDto(HttpStatus.OK,"loan details fetched successfully"));
+        if (loansDto != null){
+            return ResponseEntity.ok(loansDto);
         }else{
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
-                    .body(new ResponseDto(HttpStatus.EXPECTATION_FAILED,HttpStatus.EXPECTATION_FAILED.toString()));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 

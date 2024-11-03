@@ -49,7 +49,7 @@ public class ILoansServiceImpl implements ILoansService {
     @Override
     public LoansDto fetchLoanDetails(String mobileNumber) {
         Loans loans = loansRepository.findByMobileNumber(mobileNumber).orElseThrow(
-                ()-> new ResourceNotFoundException("loan","mobile number",mobileNumber)
+                ()-> new ResourceNotFoundException("loan","mobile",mobileNumber)
         );
         return LoansMapper.mapToDto(loans,new LoansDto());
     }
