@@ -1,9 +1,7 @@
 package com.tomcat.Loans.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.aspectj.weaver.ast.Not;
 
@@ -32,15 +30,18 @@ public class LoansDto {
     )
     @NotEmpty(message = "total loan must not be null or blank")
     @Size(min = 10000,message = "total loan should be of minimum 10k")
+    @Positive(message = "total loan should be positive, no negative value accepted here")
     private int totalLoan;
 
     @Schema(
             description = "total amount paid by customer to the bank",example = "120000"
     )
-    private String amountPaid;
+    @PositiveOrZero(message = "amount paid by customer should be zero or more")
+    private int amountPaid;
 
     @Schema(
             description = "total outstanding on active loan",example = "380000"
     )
+    @PositiveOrZero(message = "total outstanding amount should be zero or more")
     private int outstandingAmount;
 }

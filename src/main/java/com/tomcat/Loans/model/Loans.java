@@ -43,7 +43,7 @@ public class Loans {
             description = "loan amount paid by customer",
             example = "10000"
     )
-    private String amountPaid;
+    private int amountPaid;
 
     @Schema(
             description = "active loan outstanding amount",

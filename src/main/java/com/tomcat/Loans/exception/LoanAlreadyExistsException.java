@@ -3,9 +3,9 @@ package com.tomcat.Loans.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.OK)
-public class ResourceAlreadyAvailable extends RuntimeException {
-    public ResourceAlreadyAvailable(String message) {
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+public class LoanAlreadyExistsException extends RuntimeException {
+    public LoanAlreadyExistsException(String message) {
         super(message);
     }
 }
