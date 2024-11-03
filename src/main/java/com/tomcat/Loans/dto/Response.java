@@ -1,6 +1,5 @@
-package com.tomcat.Loans.model;
+package com.tomcat.Loans.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 

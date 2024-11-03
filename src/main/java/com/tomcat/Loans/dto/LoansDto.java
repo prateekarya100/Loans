@@ -14,13 +14,13 @@ public class LoansDto {
             description = "customer mobile number",example = "91234567891"
     )
     @NotEmpty(message = "mobile number must not be null or blank")
-    @Pattern(regexp = "$|[0-9]{10}",message = "mobile number must be of 10 digit only")
+    @Pattern(regexp = "^$|[0-9]{10}",message = "mobile number must be of 10 digit only")
     private String mobileNumber;
 
     @Schema(
             description = "customer mobile number",example = "1122334455"
     )
-    @Pattern(regexp = "$|[0-9]{10}",message = "account number must be of 10 digits number")
+    @Pattern(regexp = "^$|[0-9]{10}",message = "account number must be of 10 digits number")
     private String loanAccountNumber;
 
     @Schema(
