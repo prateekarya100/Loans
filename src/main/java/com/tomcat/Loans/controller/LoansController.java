@@ -31,16 +31,10 @@ public class LoansController {
                                                       @Valid
                                                       @Pattern(regexp = "!$[0-9]{10}",message = "mobile number must be of 10 digit only")
                                                       String mobileNumber){
-        boolean isLoanCreated = loansService.createNewLoan(mobileNumber);
-        if(isLoanCreated){
-            return ResponseEntity.status(HttpStatus.CREATED)
+        loansService.createNewLoan(mobileNumber);
+        return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new ResponseDto(HttpStatus.CREATED,
                             "loan created successfully"));
-        }else{
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR,
-                            "something went wrong, please try again later or contact with dev team"));
-        }
     }
 
     @GetMapping(value = "/fetch-loan")
