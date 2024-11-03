@@ -47,17 +47,17 @@ public class LoansController {
         }
     }
 
-//    @PutMapping(value = "/update-loan")
-//    public ResponseEntity<ResponseDto> updateLoans(@RequestBody @Valid LoansDto loansDto){
-//        boolean isLoanDetailUpdated = loansService.updateLoanDetails(loansDto);
-//        if(isLoanDetailUpdated){
-//            return ResponseEntity
-//                    .status(HttpStatus.ACCEPTED)
-//                    .body(new ResponseDto(HttpStatus.ACCEPTED,"loan details updated successfully"));
-//        }else{
-//            return ResponseEntity
-//                    .status(HttpStatus.EXPECTATION_FAILED)
-//                    .body(new ResponseDto(HttpStatus.EXPECTATION_FAILED,HttpStatus.EXPECTATION_FAILED.toString()));
-//        }
-//    }
+    @PutMapping(value = "/updateLoan")
+    public ResponseEntity<ResponseDto> updateLoans(@RequestBody @Valid LoansDto loansDto){
+        boolean isLoanDetailUpdated = loansService.updateLoanDetails(loansDto);
+        if(isLoanDetailUpdated){
+            return ResponseEntity
+                    .status(HttpStatus.ACCEPTED)
+                    .body(new ResponseDto(HttpStatus.ACCEPTED,"loan details updated successfully"));
+        }else{
+            return ResponseEntity
+                    .status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDto(HttpStatus.EXPECTATION_FAILED,HttpStatus.EXPECTATION_FAILED.toString()));
+        }
+    }
 }

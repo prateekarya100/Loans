@@ -58,21 +58,13 @@ public class ILoansServiceImpl implements ILoansService {
      * @param loansDto
      * @return
      */
-//    @Override
-//    public boolean updateLoanDetails(LoansDto loansDto) {
-//        return false;
-//    }
-//
-//    private Loans createNewLoanAccount(String mobileNumber) {
-//        Loans loans = new Loans();
-//        Long loanAccountNumber=10000000000L + new Random(900000000).nextInt();
-//        loans.setLoanId(loanAccountNumber);
-//        loans.setMobileNumber(mobileNumber);
-//        loans.setTotalLoan(LoansConstants.TOTAL_LOAN_AMOUNT_DISBURSED);
-//        loans.setAmountPaid(0);
-//        loans.setOutstandingAmount(LoansConstants.TOTAL_LOAN_AMOUNT_DISBURSED);
-//        return loans;
-//    }
-
-
+    @Override
+    public boolean updateLoanDetails(LoansDto loansDto) {
+        boolean isLoanDetailsUpdated=false;
+        Loans loans = loansRepository.findByLoanAccountNumber(loansDto.getLoanAccountNumber()).orElseThrow(
+                ()->new ResourceNotFoundException("loan","mobile",loansDto.getMobileNumber())
+        );
+        LoansMapper.mapToLoans(loansDto,loans);
+        return isLoanDetailsUpdated=true;
+    }
 }

@@ -9,5 +9,5 @@ public interface ILoansService {
 
     LoansDto fetchLoanDetails(String mobileNumber);
 
-//    boolean updateLoanDetails(@Valid LoansDto loansDto);
+    boolean updateLoanDetails(LoansDto loansDto);
 }
