@@ -1,5 +1,6 @@
 package com.tomcat.Loans.controller;
 
+import com.tomcat.Loans.dto.LoansDto;
 import com.tomcat.Loans.dto.ResponseDto;
 import com.tomcat.Loans.service.ILoansService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,6 +35,18 @@ public class LoansController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR,
                             "something went wrong, please try again later or contact with dev team"));
+        }
+    }
+
+    @GetMapping(value = "/fetch-loans")
+    public ResponseEntity<ResponseDto> fetchLoans(@PathVariable String mobileNumber){
+        LoansDto loansDto = loansService.fetchLoanDetails(mobileNumber);
+        if(loansDto!=null){
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseDto(HttpStatus.OK,"loan details fetched successfully"));
+        }else{
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDto(HttpStatus.EXPECTATION_FAILED,HttpStatus.EXPECTATION_FAILED.toString()));
         }
     }
 }

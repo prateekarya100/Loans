@@ -5,7 +5,7 @@ import com.tomcat.Loans.model.Loans;
 
 public class LoansMapper {
 
-    public static Loans mapToLoansDto(LoansDto loansDto,Loans loans) {
+    public static Loans mapToLoans(LoansDto loansDto,Loans loans) {
         loans.setLoanType(loansDto.getLoanType());
         loans.setTotalLoan(loansDto.getTotalLoan());
         loans.setAmountPaid(loansDto.getAmountPaid());
@@ -14,7 +14,7 @@ public class LoansMapper {
         return loans;
     }
 
-    public static LoansDto mapToLoans(Loans loans,LoansDto loansDto) {
+    public static LoansDto mapToDto(Loans loans,LoansDto loansDto) {
         loansDto.setLoanType(loans.getLoanType());
         loansDto.setTotalLoan(loans.getTotalLoan());
         loansDto.setAmountPaid(loans.getAmountPaid());
