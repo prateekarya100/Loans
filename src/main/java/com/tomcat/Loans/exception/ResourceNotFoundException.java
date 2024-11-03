@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ResourceNotFoundException extends RuntimeException {
 
     public ResourceNotFoundException(String service, String type, String mobileNumber) {
-        super(String.format("no %s found with %s : %s", service ,type,mobileNumber));
+        super(String.format("sorry, no %s found with %s : %s", service ,type,mobileNumber));
     }
 }
