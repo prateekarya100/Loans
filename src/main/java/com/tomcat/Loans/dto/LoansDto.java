@@ -19,6 +19,13 @@ public class LoansDto {
     private String mobileNumber;
 
     @Schema(
+            description = "customer mobile number",example = "1122334455"
+    )
+    @NotEmpty(message = "loan account number must not be null or blank")
+    @Pattern(regexp = "!$[0-9]{10}",message = "loan account number must be of 10 digit only")
+    private Long loanAccountNumber;
+
+    @Schema(
             description = "type of the loan",example = "personal loan"
     )
     @NotEmpty(message = "loan type must not be null or empty")

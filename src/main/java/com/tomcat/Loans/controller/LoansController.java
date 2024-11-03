@@ -28,8 +28,8 @@ public class LoansController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<ResponseDto> createLoan(@RequestParam
-                                                      @Valid
-                                                      @Pattern(regexp = "!$[0-9]{10}",message = "mobile number must be of 10 digit only")
+//                                                      @Valid
+//                                                      @Pattern(regexp = "!$[0-9]{10}",message = "mobile number must be of 10 digit only")
                                                       String mobileNumber){
         loansService.createNewLoan(mobileNumber);
         return ResponseEntity.status(HttpStatus.CREATED)

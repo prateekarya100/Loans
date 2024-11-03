@@ -21,33 +21,15 @@ public class Loans {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loanId;
 
-    @Schema(
-            description = "customer mobile number",
-            example = "91234567891"
-    )
     private String mobileNumber;
 
-    @Schema(
-            description = "type of loan taken from bank",
-            example = "personal loan"
-    )
+    private Long loanAccountNumber;
+
     private String loanType;
 
-    @Schema(
-            description = "total loan amount disbursed to customer",
-            example = "200000"
-    )
     private int totalLoan;
 
-    @Schema(
-            description = "loan amount paid by customer",
-            example = "10000"
-    )
     private int amountPaid;
 
-    @Schema(
-            description = "active loan outstanding amount",
-            example = "190000"
-    )
     private int outstandingAmount;
 }
