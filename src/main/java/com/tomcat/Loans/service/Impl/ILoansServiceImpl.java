@@ -28,8 +28,9 @@ public class ILoansServiceImpl implements ILoansService {
             throw new LoanAlreadyExistsException("loan already exists with mobile number " + mobileNumber);
         }else{
             loansRepository.save(createNewLoanAccount(mobileNumber));
+            loanCreated = true;
         }
-        return false;
+        return loanCreated;
     }
 
     private Loans createNewLoanAccount(String mobileNumber) {

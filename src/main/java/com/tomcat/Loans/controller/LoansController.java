@@ -5,6 +5,7 @@ import com.tomcat.Loans.dto.ResponseDto;
 import com.tomcat.Loans.service.ILoansService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,8 +26,11 @@ public class LoansController {
 
     private ILoansService loansService;
 
-    @PostMapping(value = "/create-loan")
-    public ResponseEntity<ResponseDto> createLoan(@PathVariable String mobileNumber){
+    @PostMapping(value = "/create")
+    public ResponseEntity<ResponseDto> createLoan(@RequestParam
+                                                      @Valid
+                                                      @Pattern(regexp = "!$[0-9]{10}",message = "mobile number must be of 10 digit only")
+                                                      String mobileNumber){
         boolean isLoanCreated = loansService.createNewLoan(mobileNumber);
         if(isLoanCreated){
             return ResponseEntity.status(HttpStatus.CREATED)
